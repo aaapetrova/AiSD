@@ -53,6 +53,7 @@ ull rec(ull n, ull m, int k){
 	/*algorithm for calculating binomial coefficients*/
     ull r;
 	r=rec(n-1,m,k+1)+rec(n-1,m-1,k+1);
+    /*intermediate values output*/
     for(int i=0;i<k;i++){
         std:: cout << " "; 
     }
