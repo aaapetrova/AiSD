@@ -18,14 +18,6 @@ int main()
     ull m = getValue();
     std:: cout << m << "\n";
 
-<<<<<<< HEAD
-=======
-	/*checking the entered data for correctness*/
-    if(m > n){
-        std::cerr << "Invalid input. M can't be larger than N. Aborting!\n";
-        exit(1);
-    }
->>>>>>> 1f7ff6f106210cfc74e14ffba41052d567842828
     std:: cout << "Intermediate value\n";
     ull r=rec(n,m,0);
     std:: cout << "Answer: [" << r << "]\n";
