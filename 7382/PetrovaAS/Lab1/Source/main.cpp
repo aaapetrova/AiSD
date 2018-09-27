@@ -1,5 +1,7 @@
 #include <iostream>
 
+/*Вариант 1*/ 
+
 using namespace std;
 typedef unsigned long long ull;
 
