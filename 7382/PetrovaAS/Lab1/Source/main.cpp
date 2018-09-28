@@ -56,7 +56,7 @@ ull rec(ull n, ull m, int k){
     for(int i=0;i<k;i++){
         std:: cout << " "; 
     }
-    std:: cout<< r << "\n";
+    std:: cout << "intermediate value for C("<< n << "," << m << ")"<< r << "\n";
     for(int i=k;i>0;i--){
         std:: cout << " "; 
     }
