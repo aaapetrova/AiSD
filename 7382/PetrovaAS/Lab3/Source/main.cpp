@@ -5,32 +5,26 @@
 using namespace std;
 typedef unsigned long ul;
 
-void error_Handler(ul descriptor) {
-    if (descriptor == 2) {
-        cerr << "[ERROR] Invalid filepath. Aborting!" << endl;
-        exit(1);
-    }
-}
-
-class listElement {
+class ListElement {
 public:
-    listElement* next;
-    listElement* prev;
+    ListElement* next;
+    ListElement* prev;
     char liter;
 };
 
-class listStack {
+class ListStack {
 public:
-    listStack() {
+    ListStack() {
         mSize = 0;
     }
-    ~listStack() {
+    ~ListStack() {
         while(!empty())
             pop_Back();
     }
 
-    void push_Back(char &data){ // Вставка в конец
-        listElement* ptr = new listElement;
+// Вставка в элемента в конец стэка
+    void push_Back(char &data){ 
+        ListElement* ptr = new ListElement;
         if(!mSize) {
             root = ptr;
             end = ptr;
@@ -46,7 +40,8 @@ public:
         mSize++;
     }
 
-    void pop_Back(){ // Удаление
+// Удаление элемента 
+    void pop_Back(){ 
         if(!mSize)
             error_Handler(1);
         else if(mSize == 1) {
@@ -60,8 +55,8 @@ public:
         }
         mSize--;
     }
-
-    void clear(ofstream &mStream){ // вывод в поток stream и удаление стэка
+// Вывод в поток stream и удаление стэка
+    void clear(ofstream &mStream){ 
         while(!empty()) {
             mStream << top();
             pop_Back();
@@ -86,44 +81,44 @@ private:
 
     void error_Handler(ul descriptor){
         if(descriptor == 1) {
-            cerr << "[ERROR] Trying to pop() in empty stack" << endl;
+            cerr << "[ERROR] Trying to pop() in empty stack." << endl;
             exit(1);
         } else if(descriptor == 2) {
-            cerr << "[ERROR] Trying to top() in empty stack" << endl;
+            cerr << "[ERROR] Trying to top() in empty stack." << endl;
             exit(1);
         }
     }
 
     ul mSize;
-    listElement* root;
-    listElement* end;
+    ListElement* root;
+    ListElement* end;
 };
 
-
-void reverseStrings() // Реверс строк
+int main()
 {
     string str;
     string filePath;
     cin >> filePath;
 
-    ifstream mInFile; // Поток файловый входной
-    mInFile.open(filePath, std::ifstream::binary);
-    if(!mInFile)
-        error_Handler(2);
+// Поток файловый входной
+    ifstream mInFile; 
 
-    ofstream mOutFile; // Поток файловый выходной
+    mInFile.open(filePath, std::ifstream::binary);
+    if(!mInFile){
+        cerr << "[ERROR] Invalid filepath.";
+        exit(1);
+    }
+
+// Поток файловый выходной
+    ofstream mOutFile; 
     mOutFile.open("output.txt", std::ofstream::binary);
 
-    while(getline(mInFile, str, '\n')) {  // Считывая построчно файл, записываем символы в стэк
-        listStack mStack;
+// Считывая построчно файл, записываем символы в стэк
+    while(getline(mInFile, str, '\n')) {  
+        ListStack mStack;
         for(ul it = 0; it<str.size(); it++)
             mStack.push_Back(str[it]);
         mStack.clear(mOutFile); // Вывод в поток
     }
-}
-
-int main()
-{
-    reverseStrings();
     return 0;
 }
