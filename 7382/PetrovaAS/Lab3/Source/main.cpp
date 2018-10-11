@@ -17,12 +17,8 @@ public:
     ListStack() {
         mSize = 0;
     }
-    ~ListStack() {
-        while(!empty())
-            pop_Back();
-    }
 
-// Вставка в элемента в конец стэка
+// Вставка элемента в конец стека
     void push_Back(char &data){ 
         ListElement* ptr = new ListElement;
         if(!mSize) {
@@ -55,7 +51,7 @@ public:
         }
         mSize--;
     }
-// Вывод в поток stream и удаление стэка
+// Вывод в поток stream и удаление стека
     void clear(ofstream &mStream){ 
         while(!empty()) {
             mStream << top();
@@ -64,12 +60,14 @@ public:
         mStream << '\n';
     }
 
+// Просмотр верхнего элемента стека
     char top(){
         if(!mSize)
             error_Handler(2);
         return end->liter;
     }
 
+// Проверка стека на пустоту
     bool empty(){
         if(!mSize)
             return true;
@@ -78,8 +76,8 @@ public:
     }
 
 private:
-
-    void error_Handler(ul descriptor){
+    // Обработка ошибок методов класса
+   void error_Handler(ul descriptor){
         if(descriptor == 1) {
             cerr << "[ERROR] Trying to pop() in empty stack." << endl;
             exit(1);
@@ -113,7 +111,7 @@ int main()
     ofstream mOutFile; 
     mOutFile.open("output.txt", std::ofstream::binary);
 
-// Считывая построчно файл, записываем символы в стэк
+// Считывая построчно файл, записываем символы в стек
     while(getline(mInFile, str, '\n')) {  
         ListStack mStack;
         for(ul it = 0; it<str.size(); it++)
