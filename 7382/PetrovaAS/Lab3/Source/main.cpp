@@ -17,6 +17,10 @@ public:
     ListStack() {
         mSize = 0;
     }
+    ~ListStack() {
+        while(!empty())
+            pop_Back();
+    }
 
 // Вставка элемента в конец стека
     void push_Back(char &data){ 
